@@ -6,13 +6,14 @@
   "scripts": {
     "start": "webpack -p --config --progress --watch",
     "compile": "webpack -p --config --progress",
-    "prepublish": "npm run compile",
+    "prepublish": "npm run snyk-protect && npm run compile",
     "pretest": "npm run lint",
     "test": "npm run testonly",
     "testonly": "mocha --compilers js:babel-core/register \"src/**/*.spec.js\"",
     "lint": "eslint src",
     "coverage": "istanbul cover _mocha -- --compilers js:babel-core/register \"src/**/*.spec.js\" -R spec",
-    "coveralls": "istanbul cover _mocha --report lcovonly -- --compilers js:babel-core/register \"src/**/*.spec.js\" -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage"
+    "coveralls": "istanbul cover _mocha --report lcovonly -- --compilers js:babel-core/register \"src/**/*.spec.js\" -R spec && cat ./coverage/lcov.info | ./node_modules/coveralls/bin/coveralls.js && rm -rf ./coverage",
+    "snyk-protect": "snyk protect"
   },
   "repository": {
     "type": "git",
@@ -63,6 +64,8 @@
   },
   "dependencies": {
     "immutable": "^3.8.1",
-    "redux": "^3.6.0"
-  }
+    "redux": "^3.6.0",
+    "snyk": "^1.317.0"
+  },
+  "snyk": true
 }
